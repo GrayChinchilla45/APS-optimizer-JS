@@ -30,4 +30,7 @@ Then open:
 ```text
 http://127.0.0.1:4173
 ```
+# Known issues:
+3-clip tetris on boards larger than 25x25 may not be perfect. Trying to make it perfect is too computationally expensive, however, so this is the best it can do. 
+
 Coded with ChatGPT Codex
