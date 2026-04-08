@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>APS Optimizer Web</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">From The Depths</p>
+          <h1>APS Optimizer Web</h1>
+          <p class="hero-copy">
+            A local web version of the APS optimizer with editable templates,
+            symmetry-aware solving, and one-click JSON export.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div class="metric">
+            <span class="metric-label">Grid fill</span>
+            <strong id="fillMetric">0%</strong>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Placed shapes</span>
+            <strong id="shapeMetric">0</strong>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Search status</span>
+            <strong id="statusMetric">Ready</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-grid">
+        <section class="panel controls-panel">
+          <div class="panel-header">
+            <h2>Controls</h2>
+            <button id="resetResultButton" class="ghost-button">Clear Solution</button>
+          </div>
+
+          <div class="control-grid">
+            <label>
+              <span>Template</span>
+              <select id="templateSelect"></select>
+            </label>
+
+            <label>
+              <span>Symmetry</span>
+              <select id="symmetrySelect"></select>
+            </label>
+
+            <label>
+              <span>Width</span>
+              <input id="widthInput" type="number" min="5" max="31" step="1">
+            </label>
+
+            <label>
+              <span>Height</span>
+              <input id="heightInput" type="number" min="5" max="31" step="1">
+            </label>
+
+            <label class="toggle">
+              <input id="hardSymmetryToggle" type="checkbox">
+              <span>Use hard symmetry</span>
+            </label>
+          </div>
+
+          <div class="shape-section">
+            <h3>Shape</h3>
+            <label>
+              <span>Clip pattern</span>
+              <select id="shapeSelect"></select>
+            </label>
+            <div id="shapeList" class="shape-list"></div>
+          </div>
+
+          <div class="action-row">
+            <button id="solveButton" class="primary-button">Solve Layout</button>
+            <button id="randomizeButton" class="secondary-button">Randomize Search</button>
+            <button id="resetBoardButton" class="secondary-button">Reapply Template</button>
+            <button id="downloadButton" class="secondary-button">Download JSON</button>
+          </div>
+
+          <div class="notes">
+            <div class="status-stack">
+              <p id="backendInfo" class="status-pill subtle-text">Backend: checking...</p>
+              <p id="boardInfo" class="status-pill subtle-text">Board: template-aligned</p>
+              <p class="status-pill subtle-text">Solve timeout: fixed 15 seconds</p>
+            </div>
+            <p id="solveAdvice" class="advice-text" hidden></p>
+            <p>
+              The app runs locally through a lightweight Node service and uses CryptoMiniSat when available,
+              with solver-specific fallbacks for the larger periodic search cases.
+            </p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Template Editor</h2>
+            <span class="subtle-text">Click cells to block or unblock them.</span>
+          </div>
+          <div class="board-shell">
+            <div id="editorGrid" class="grid-board" aria-label="Template editor"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Result</h2>
+            <span id="resultSummary" class="subtle-text">No solve has been run yet.</span>
+          </div>
+          <div class="board-shell">
+            <div id="resultGrid" class="grid-board" aria-label="Solve result"></div>
+          </div>
+        </section>
+
+        <section class="panel summary-panel">
+          <div class="panel-header">
+            <h2>Summary</h2>
+            <span id="searchTimer" class="subtle-text">0 ms</span>
+          </div>
+          <div id="summaryContent" class="summary-content"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+  </html>

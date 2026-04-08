@@ -1,0 +1,13 @@
+{
+  "name": "aps-optimizer-web",
+  "version": "1.0.0",
+  "description": "Local web app for APS template optimization with CryptoMiniSat-backed solving.",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "start": "node ./server.js",
+    "serve": "node ./server.js",
+    "check": "node --check ./app.js && node --check ./server.js && node --check ./solver-service.js"
+  },
+  "license": "MIT"
+}
